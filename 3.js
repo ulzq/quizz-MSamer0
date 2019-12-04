@@ -13,14 +13,23 @@ var antwortButton = document.getElementById('go')
 var antwortFeld = document.getElementById('antwort')
 let frage;
 
-neueAufgabeButton.onclick = (e)=> {
+function neueFrage(){
   frage = questions[Math.floor(Math.random()*questions.length)];
   frageDiv.innerText = frage.question
   new Promise( (resolve,reject) => {
     setTimeout( function antwort() { 
-      alert("falsch");
-     }, 1000 )
+      if ( antwortFeld.value.trim() === frage.answer ){
+        resolve(punkteDiv.innerText = Number(punkteDiv.innerText) + 100)
+      } else {
+        punkteDiv.innerText = Number(punkteDiv.innerText) - 100
+      }
+      neueFrage()
+     }, 10000 )
   })
+}
+
+neueAufgabeButton.onclick = (e)=> {
+  neueFrage()
 }
 
 antwortButton.onclick = (e)=> {

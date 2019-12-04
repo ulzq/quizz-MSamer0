@@ -18,8 +18,12 @@ neueAufgabeButton.onclick = (e)=> {
   frageDiv.innerText = frage.question
   new Promise( (resolve,reject) => {
     setTimeout( function antwort() { 
-      alert("falsch");
-     }, 1000 )
+      if ( antwortFeld.value.trim() === frage.answer ){
+        punkteDiv.innerText = Number(punkteDiv.innerText) + 100
+      } else {
+        punkteDiv.innerText = Number(punkteDiv.innerText) - 100
+      }
+     }, 10000 )
   })
 }
 
